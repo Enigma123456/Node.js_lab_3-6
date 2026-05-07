@@ -17,7 +17,6 @@ module.exports = {
         await repository.deletePetition(id);
     },
 
-    // 👇 ОСЬ ЦЕЙ МЕТОД МИ ЗАБУЛИ ДОДАТИ 👇
     updatePetition: async (id, title, description) => {
         await repository.updatePetition(id, title, description);
     }
