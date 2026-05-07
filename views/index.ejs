@@ -1,0 +1,41 @@
+<head><link rel="stylesheet" href="/style.css"></head>
+
+<body>
+    <h1>Сайт подачі петицій</h1>
+    
+    <div">
+        <h2>Створити нову петицію</h2>
+        <form action="/create" method="POST">
+            <input type="text" name="title" placeholder="Назва петиції" required style="width: 100%; margin-bottom: 10px;"><br>
+            <textarea name="description" placeholder="Опис проблеми" required style="width: 100%; margin-bottom: 10px;"></textarea><br>
+            <button type="submit" >Створити петицію</button>
+        </form>
+    </div>
+
+    <h2>Активні петиції:</h2>
+    <% if (petitions.length > 0) { %>
+        <% petitions.forEach(function(petition) { %>
+            <div class="petition-card">
+                <h3><%= petition.title %></h3>
+                <p><%= petition.description %></p>
+                <p>Голосів: <span class="votes"><%= petition.votes %></span></p>
+                
+                <div>
+                    <form action="/vote/<%= petition.id %>" method="POST" style="margin: 0;">
+                        <button type="submit" >Проголосувати</button>
+                    </form>
+                    
+                    <form action="/edit/<%= petition.id %>" method="GET" style="margin: 0;">
+                        <button type="submit">Редагувати</button>
+                    </form>
+
+                    <form action="/delete/<%= petition.id %>" method="POST" style="margin: 0;">
+                        <button type="submit">Видалити</button>
+                    </form>
+                </div>
+            </div>
+        <% }); %>
+    <% } else { %>
+        <p>Наразі немає активних петицій.</p>
+    <% } %>
+</body>
